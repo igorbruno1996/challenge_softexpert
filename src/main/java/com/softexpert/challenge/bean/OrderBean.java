@@ -1,6 +1,5 @@
 package com.softexpert.challenge.bean;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,7 +16,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class OrderBean implements Serializable {
 
-	@Serial
 	private static final long serialVersionUID = 1381594287753397659L;
 	
 	private List<Double> amounts;
