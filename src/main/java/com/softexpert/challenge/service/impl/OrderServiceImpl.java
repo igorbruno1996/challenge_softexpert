@@ -9,10 +9,12 @@ public class OrderServiceImpl implements OrderService {
 
     public Double calculateOrder(OrderBean order) {
 
-        Double netAmount = order.getAmounts().stream().reduce(0.0, Double::sum);
-        netAmount = this.discount(netAmount, order.getDiscountAmount(), order.getTotalOrder());
-        netAmount = this.add(netAmount, order.getDeliveryAmount(), order.getTotalOrder());
-        return netAmount;
+        Double liquidityAmount = order.getAmounts().stream().reduce(0.0, Double::sum);
+        Double totalDiscount = order.getDiscounts().stream().reduce(0.0, Double::sum);
+        Double totalTax = order.getAdditionalTaxes().stream().reduce(0.0, Double::sum);
+        liquidityAmount = this.discount(liquidityAmount, totalDiscount, order.getTotalOrder());
+        liquidityAmount = this.add(liquidityAmount, totalTax, order.getTotalOrder());
+        return liquidityAmount;
     }
 
     private Double discount(Double amount, Double discountAmount, Integer totalOrder) {

@@ -19,8 +19,8 @@ public class OrderBean implements Serializable {
 	private static final long serialVersionUID = 1381594287753397659L;
 	
 	private List<Double> amounts;
-	private Double deliveryAmount;
-	private Double discountAmount;
+	private List<Double> additionalTaxes;
+	private List<Double> discounts;
 	private Integer totalOrder;
 	private Long paymentMethodId;
 	private String payeeId;

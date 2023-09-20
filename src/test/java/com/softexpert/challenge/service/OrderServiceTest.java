@@ -25,8 +25,8 @@ class OrderServiceTest {
     void calculateOrderWithoutDiscountAndDelivery() {
 
         OrderBean orderBean = OrderBeanGeneratorUtil.getOrderBean();
-        orderBean.setDeliveryAmount(0.0);
-        orderBean.setDiscountAmount(0.0);
+        orderBean.getAdditionalTaxes().clear();
+        orderBean.getDiscounts().clear();
         Double expected = this.orderService.calculateOrder(orderBean);
         assertEquals(10.0, expected);
     }

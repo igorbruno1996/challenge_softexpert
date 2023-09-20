@@ -14,8 +14,8 @@ public class OrderBeanGeneratorUtil {
 
         return OrderBean.builder().
                 amounts(Stream.of(10.0).collect(Collectors.toList())).
-                deliveryAmount(8.0).
-                discountAmount(5.0).
+                additionalTaxes(Stream.of(8.0).collect(Collectors.toList())).
+                discounts(Stream.of(5.0).collect(Collectors.toList())).
                 totalOrder(2).
                 paymentMethodId(1L).
                 payeeId("mistersonya").
