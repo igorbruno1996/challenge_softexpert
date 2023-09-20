@@ -3,10 +3,7 @@ package com.softexpert.challenge.controller;
 import com.softexpert.challenge.enums.PaymentMethodEnum;
 import com.softexpert.challenge.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.softexpert.challenge.bean.OrderBean;
 
@@ -17,7 +14,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping
+    @PostMapping
     public String processOrder(@RequestBody OrderBean order) {
 
         Double netAmount = this.orderService.calculateOrder(order);
