@@ -1,5 +1,6 @@
 package com.softexpert.challenge.controller;
 
+import com.softexpert.challenge.bean.OrderProcessedBean;
 import com.softexpert.challenge.enums.PaymentMethodEnum;
 import com.softexpert.challenge.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,11 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping
-    public String processOrder(@RequestBody OrderBean order) {
+    public OrderProcessedBean processOrder(@RequestBody OrderBean order) {
 
         Double netAmount = this.orderService.calculateOrder(order);
-        return PaymentMethodEnum.getLinkById(order.getPaymentMethodId(), order.getPayeeId(), netAmount);
+        return OrderProcessedBean.builder()
+                .paymentLink(PaymentMethodEnum.getLinkById(order.getPaymentMethodId(), order.getPayeeId(), netAmount))
+                .build();
     }
 }

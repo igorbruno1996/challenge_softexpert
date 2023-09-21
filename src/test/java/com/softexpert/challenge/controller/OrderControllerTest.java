@@ -12,11 +12,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(OrderController.class)
@@ -37,8 +37,8 @@ class OrderControllerTest {
         given(this.orderService.calculateOrder(any())).willReturn(20.0);
         this.mvc.perform(post("/order").contentType(MediaType.APPLICATION_JSON).content(this.mapper
                         .writeValueAsString(OrderBeanGeneratorUtil.getOrderBean())))
-                .andExpect(status().isOk())
-                .andExpect(content().string("https://picpay.me/mistersonya/20.0"));
+                .andExpect(jsonPath("$['paymentLink']", is("https://picpay.me/mistersonya/20.0")))
+                .andExpect(status().isOk());
 
     }
 }
