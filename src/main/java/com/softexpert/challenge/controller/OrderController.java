@@ -9,6 +9,7 @@ import com.softexpert.challenge.bean.OrderBean;
 
 @RestController
 @RequestMapping("/order")
+@CrossOrigin(origins = "*")
 public class OrderController {
 
     @Autowired
